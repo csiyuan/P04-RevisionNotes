@@ -66,6 +66,13 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 			iv2.setImageResource(android.R.drawable.btn_star_big_on);
 			iv1.setImageResource(android.R.drawable.btn_star_big_on);
 		}
+		else if(stars == 2) {
+			iv2.setImageResource(android.R.drawable.btn_star_big_on);
+			iv1.setImageResource(android.R.drawable.btn_star_big_on);
+		}
+		else {
+			iv1.setImageResource(android.R.drawable.btn_star_big_on);
+		}
 
 		// Set the image to star or nostar accordingly
 
