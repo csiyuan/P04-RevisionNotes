@@ -93,11 +93,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		return notes;
 	}
 
-    public ArrayList<String> getNoteContent() {
+    public ArrayList<Note> getNoteContent() {
         //TODO return records in Strings
 
 		// Create an ArrayList that holds String objects
-        ArrayList<String> notes = new ArrayList<String>();
+        ArrayList<Note> notes = new ArrayList<>();
         // Select all the notes' content
         String selectQuery = "SELECT "+ COLUMN_ID + ", "
 				+ COLUMN_NOTECONTENT + ", "
