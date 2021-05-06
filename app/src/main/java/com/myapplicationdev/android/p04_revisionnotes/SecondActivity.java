@@ -11,11 +11,8 @@ import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
 	ListView lv;
-	ArrayAdapter aa;
-	ArrayList<Note> note;
-
-
-
+	ArrayList<Note> aa;
+	RevisionNotesArrayAdapter al;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,11 +21,11 @@ public class SecondActivity extends AppCompatActivity {
 
 		lv = findViewById(R.id.lv);
 
-		Intent intent = getIntent();
+		DBHelper dbHelper = new DBHelper(SecondActivity.this);
+		aa = dbHelper.getAllNotes();
 
-
+		al = new RevisionNotesArrayAdapter(SecondActivity.this, R.layout.row, aa);
+		lv.setAdapter(al);
 
 	}
-
-
 }

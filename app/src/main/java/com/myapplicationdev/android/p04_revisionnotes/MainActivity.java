@@ -1,6 +1,8 @@
 package com.myapplicationdev.android.p04_revisionnotes;
 
 import android.content.Intent;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra("good", false);
-                Note note = (Note) intent.getSerializableExtra("note");
-                startActivityForResult(intent, requestData);
+              //  intent.putExtra("good", false);
+                startActivity(intent);
             }
         });
     }
+
+
 }
