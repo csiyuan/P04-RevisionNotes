@@ -41,13 +41,10 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		iv5 = (ImageView) rowView.findViewById(R.id.imageView5star);
 		tvNote = (TextView) rowView.findViewById(R.id.textViewNote);
 
-
-
 		Note currentNote = notes.get(position);
-
-		//Check if the property for starts >= 5, if so, "light" up the stars
 		tvNote.setText(currentNote.getNoteContent());
 
+		//Check if the property for starts >= 5, if so, "light" up the stars
 		int stars = 0;
 
 		if (stars >= 5) {
