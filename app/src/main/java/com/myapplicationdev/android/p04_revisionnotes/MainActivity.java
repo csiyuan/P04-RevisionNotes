@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 if (Integer.valueOf(rgStar.getText().toString()) > 0 && !etNote.getText().toString().isEmpty()) {
 
                     db.insertNote(etNote.getText().toString().trim(), Integer.valueOf(rgStar.getText().toString()));
+                    Toast.makeText(MainActivity.this,"Inserted", Toast.LENGTH_LONG).show();
+
                     Log.d("Insert Database", "added into database");
                 } else
                     Log.d("Insert Database", "Failed to insert, no value entries");
