@@ -16,8 +16,6 @@ public class SecondActivity extends AppCompatActivity {
 		//TODO implement the Custom ListView
 		lv = findViewById(R.id.lv);
 
-
-
 	}
 
 
