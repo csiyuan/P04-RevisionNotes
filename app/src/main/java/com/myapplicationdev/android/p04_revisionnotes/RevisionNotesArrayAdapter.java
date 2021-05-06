@@ -22,7 +22,6 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		super(context, resource, notes);
 		this.context = context;
 		this.notes = notes;
-		//notes = notes;
 		this.resource = resource;
 	}
 
@@ -32,8 +31,7 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		View rowView = inflater.inflate(resource, parent, false);
-
-		//Match the UI components with Java variables
+		
 		iv1 = (ImageView) rowView.findViewById(R.id.imageView1star);
 		iv2 = (ImageView) rowView.findViewById(R.id.imageView2star);
 		iv3 = (ImageView) rowView.findViewById(R.id.imageView3star);
@@ -44,7 +42,6 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		Note currentNote = notes.get(position);
 		tvNote.setText(currentNote.getNoteContent());
 
-		//Check if the property for starts >= 5, if so, "light" up the stars
 		int stars = currentNote.getStars();
 
 		if (stars >= 5) {
@@ -69,10 +66,6 @@ public class RevisionNotesArrayAdapter extends ArrayAdapter<Note> {
 		} else {
 			iv1.setImageResource(android.R.drawable.btn_star_big_on);
 		}
-
-		// Set the image to star or nostar accordingly
-
-
 
 		return rowView;
 	}
