@@ -13,9 +13,6 @@ public class SecondActivity extends AppCompatActivity {
 	ListView lv;
 	ArrayAdapter aa;
 	ArrayList<Note> note;
-
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,7 +22,16 @@ public class SecondActivity extends AppCompatActivity {
 		lv = findViewById(R.id.lv);
 
 		Intent intent = getIntent();
+		note = new ArrayList<Note>();
 
+
+
+
+		DBHelper dbHelper = new DBHelper(SecondActivity.this);
+		note = dbHelper.getAllNotes();
+
+		aa = new RevisionNotesArrayAdapter(SecondActivity.this, R.layout.row, note);
+		lv.setAdapter(aa);
 
 
 	}
