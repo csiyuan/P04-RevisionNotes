@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnInsertNote, btnShowList;
     ArrayList<Note> aa;
 
+    int requestData = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         etNote = findViewById(R.id.editTextNote);
         btnInsertNote = findViewById(R.id.buttonInsertNote);
         btnShowList = findViewById(R.id.buttonShowList);
-//        btnShowGood = findViewById(R.id.buttonShowGood);
+//      btnShowGood = findViewById(R.id.buttonShowGood);
 
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
 
@@ -53,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
         btnShowList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this, SecondActivity.class);
                 intent.putExtra("good", false);
-                startActivity(intent);
+                Note note = (Note) intent.getSerializableExtra("note");
+                startActivityForResult(intent, requestData);
             }
         });
     }
