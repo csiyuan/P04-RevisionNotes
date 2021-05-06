@@ -34,7 +34,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				+ COLUMN_STARS + " INTEGER )";
 		db.execSQL(createTableSql);
 		Log.i("info" ,"created tables");
-
 	}
 
 	@Override
@@ -45,10 +44,53 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	public void insertNote(String noteContent, int stars) {
 		//TODO insert the data into the database
+		// Get an instance of the database for writing
+		SQLiteDatabase db = this.getWritableDatabase();
+		// We use ContentValues object to store the values for
+		//  the db operation
+		ContentValues values = new ContentValues();
+		// Store the column name as key and the description as value
+		values.put(COLUMN_NOTECONTENT, noteContent);
+		// Store the column name as key and the date as value
+		values.put(COLUMN_STARS, stars);
+		// Insert the row into the TABLE_TASK
+		db.insert(TABLE_NOTE, null, values);
+		// Close the database connection
+		db.close();
 	}
 
 	public ArrayList<Note> getAllNotes() {
 		//TODO return records in Java objects
+		// Create an ArrayList that holds String objects
+		ArrayList<Note> notes = new ArrayList<>();
+		// Select all the tasks' description
+		String selectQuery = "SELECT *"
+				+ " FROM " + TABLE_NOTE;
+
+		// Get the instance of database to read
+		SQLiteDatabase db = this.getReadableDatabase();
+		// Run the SQL query and get back the Cursor object
+		Cursor cursor = db.rawQuery(selectQuery, null);
+
+		// moveToFirst() moves to first row, null if no records
+		if (cursor.moveToFirst()) {
+			// Loop while moveToNext() points to next row
+			//  and returns true; moveToNext() returns false
+			//  when no more next row to move to
+			do {
+				// Add the task content to the ArrayList object
+				//  getString(0) retrieves first column data
+				//  getString(1) return second column data
+				//  getInt(0) if data is an integer value
+				notes.add(new Note (cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
+
+			} while (cursor.moveToNext());
+		}
+		// Close connection
+		cursor.close();
+		db.close();
+
+		return notes;
 	}
 
     public ArrayList<String> getNoteContent() {
@@ -57,7 +99,10 @@ public class DBHelper extends SQLiteOpenHelper {
 		// Create an ArrayList that holds String objects
         ArrayList<String> notes = new ArrayList<String>();
         // Select all the notes' content
-        String selectQuery = "";
+        String selectQuery = "SELECT "+ COLUMN_ID + ", "
+				+ COLUMN_NOTECONTENT + ", "
+				+ COLUMN_STARS
+				+ "FROM" + TABLE_NOTE;
 
         // Get the instance of database to read
         SQLiteDatabase db = this.getReadableDatabase();
@@ -68,8 +113,11 @@ public class DBHelper extends SQLiteOpenHelper {
             // Loop while moveToNext() points to next row and returns true;
             // moveToNext() returns false when no more next row to move to
             do {
-
-
+				int id = cursor.getInt(0);
+				String notecontent = cursor.getString(1);
+				int star = cursor.getInt(2);
+				Note obj = new Note(id, notecontent, star);
+				notes.add(obj);
             } while (cursor.moveToNext());
         }
         // Close connection
